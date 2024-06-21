@@ -1,5 +1,5 @@
 import styles from '@/app/page.module.css';
-import noteStyles from '../note.module.css';
+import noteStyles from '../../note.module.css';
 import Navbar from '@/app/navbar';
 import Footer from '@/app/footer';
 import { getAllNoteIds, getNote } from '@/app/../../lib/notes';
