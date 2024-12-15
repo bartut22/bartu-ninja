@@ -1,0 +1,42 @@
+name: Deploy to DigitalOcean
+
+on:
+  push:
+    branches:
+      - main  # Trigger deploy on pushes to the main branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest  # GitHub Actions runs on Ubuntu
+
+    steps:
+    # Step 1: Check out the code
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    # Step 2: Set up SSH
+    - name: Set up SSH
+      run: |
+        mkdir -p ~/.ssh
+        echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa  # Use your private key from GitHub secrets
+        chmod 600 ~/.ssh/id_rsa  # Ensure the private key is readable only by the user
+        ssh-keyscan -t rsa ${{ secrets.DROPLET_IP }} >> ~/.ssh/known_hosts  # Add droplet IP to known hosts to avoid authenticity check
+
+    # Step 3: Build the React app
+    - name: Build React app
+      run: |
+        npm install
+        npm run build  # Assuming you're using npm. Adjust if using yarn
+
+    # Step 4: Upload build to DigitalOcean droplet
+    - name: Upload Build to Droplet
+      run: |
+        scp -r build/* root@${{ secrets.DROPLET_IP }}:/var/www/html
+
+    # Step 5: Restart Nginx to serve the updated build
+    - name: Restart Nginx
+      run: |
+        ssh root@${{ secrets.DROPLET_IP }} "sudo systemctl restart nginx" 
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }} 
+
