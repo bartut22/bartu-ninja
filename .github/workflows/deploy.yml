@@ -30,10 +30,10 @@ jobs:
       - name: Upload Build to Droplet
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          SERVER_IP: ${{ secrets.SERVER_IP }}
-          SERVER_USER: ${{ secrets.SERVER_USER }}
+          DROPLET_IP: ${{ secrets.DROPLET_IP }}
+          DROPLET_USER: ${{ secrets.DROPLET_USER }}
         run: |
           mkdir -p ~/.ssh
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          scp -r ./ .next/standalone $SERVER_USER@$SERVER_IP:/var/www/html/
+          scp -r ./ .next/standalone $DROPLET_USER@$DROPLET_IP:/var/www/html/
