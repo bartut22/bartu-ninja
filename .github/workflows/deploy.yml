@@ -32,13 +32,9 @@ jobs:
         run: |
           ssh-keyscan -H $DROPLET_IP >> ~/.ssh/known_hosts
           ssh -v -i ~/.ssh/id_rsa $DROPLET_USER@$DROPLET_IP << 'EOF' 
-            if [ ! -d "/var/www/bartu-ninja" ]; then
-              echo "Creating directory..."
-              mkdir -p /var/www/bartu-ninja
-            fi
-
             if [ ! -d "/var/www/bartu-ninja/.git" ]; then
               echo "Cloning repository from GitHub..."
+              mkdir -p /var/www/bartu-ninja
               git clone $REPO_URL /var/www/bartu-ninja
             fi
 
