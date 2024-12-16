@@ -28,6 +28,18 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           DROPLET_IP: ${{ secrets.DROPLET_IP }}
           DROPLET_USER: ${{ secrets.DROPLET_USER }}
+          REPO_URL: ${{ secrets.REPO_URL }}
         run: |
           ssh-keyscan -H $DROPLET_IP >> ~/.ssh/known_hosts
-          ssh -v -i ~/.ssh/id_rsa $DROPLET_USER@$DROPLET_IP "cd /var/www/bartu-ninja/ && git pull && npm install && npm run build"
+          ssh -v -i ~/.ssh/id_rsa $DROPLET_USER@$DROPLET_IP << 'EOF' 
+            # Check if the repository is already cloned
+            if [ ! -d "/var/www/bartu-ninja/.git" ]; then
+              echo "Cloning repository from GitHub..."
+              git clone $REPO_URL /var/www/bartu-ninja
+            fi
+
+            cd /var/www/bartu-ninja/
+            git pull 
+            npm install
+            npm run build
+          EOF
