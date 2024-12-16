@@ -3,42 +3,15 @@ name: Deploy to DigitalOcean
 on:
   push:
     branches:
-      - new  # Trigger deploy on pushes to the main branch
+      - new
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest  # GitHub Actions runs on Ubuntu
+    runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Check out the code
       - name: Checkout repository
         uses: actions/checkout@v3
-
-      # Step 2: Set up Node.js
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
-
-      # Step 3: Build the React app
-      - name: Build React app
-        run: |
-          npm install
-          npm run build 
-
-      # Step 4: Upload build to DigitalOcean droplet
-      - name: Upload Build to Droplet
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          DROPLET_IP: ${{ secrets.DROPLET_IP }}
-          DROPLET_USER: ${{ secrets.DROPLET_USER }}
-        run: |
-          mkdir -p ~/.ssh
-          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          scp -r ./ .next/standalone $DROPLET_USER@$DROPLET_IP:/var/www/html/
-
-
 
       - name: Set up SSH key
         run: |
@@ -48,16 +21,11 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      - name: Add DigitalOcean Droplet to known hosts
-        env:
-          DROPLET_IP: ${{ secrets.DROPLET_IP }}
-        run: |
-          ssh-keyscan -H $DROPLET_IP >> ~/.ssh/known_hosts
-
       - name: SSH into Droplet and start build
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           DROPLET_IP: ${{ secrets.DROPLET_IP }}
           DROPLET_USER: ${{ secrets.DROPLET_USER }}
         run: |
+          ssh-keyscan -H $DROPLET_IP >> ~/.ssh/known_hosts
           ssh -i ~/.ssh/id_rsa $DROPLET_USER@$DROPLET_IP "cd /var/www/bartu-ninja/ && git pull && npm install && npm run build"
