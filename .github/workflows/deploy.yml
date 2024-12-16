@@ -20,11 +20,11 @@ jobs:
         with:
           node-version: 20
 
-    # Step 3: Build the React app
-    - name: Build React app
-      run: |
-        npm install
-        npm run build  # Assuming you're using npm. Adjust if using yarn
+      # Step 3: Build the React app
+      - name: Build React app
+        run: |
+          npm install
+          npm run build  # Assuming you're using npm. Adjust if using yarn
 
       # Step 4: Upload build to DigitalOcean droplet
       - name: Upload Build to Droplet
