@@ -32,8 +32,7 @@ jobs:
         run: |
           ssh-keyscan -H $DROPLET_IP >> ~/.ssh/known_hosts
           ssh -v -i ~/.ssh/id_rsa $DROPLET_USER@$DROPLET_IP << 'EOF' 
-            # Check if the repository is already cloned
-            if [ ! -d "/var/www/bartu-ninja"]; then
+            if [ ! -d "/var/www/bartu-ninja" ]; then
               echo "Creating directory..."
               mkdir -p /var/www/bartu-ninja
             fi
