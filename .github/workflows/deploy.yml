@@ -17,9 +17,11 @@ jobs:
         run: |
           mkdir -p ~/.ssh
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
+          sudo chmod 600 ~/.ssh/id_rsa
+          echo "ssh-rsa $SSH_PUBLIC_KEY" > ~/.ssh/authorized_keys
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_PUBLIC_KEY: ${{ secrets.SSH_PUBLIC_KEY }}
 
       - name: SSH into Droplet and start build
         env:
@@ -28,4 +30,4 @@ jobs:
           DROPLET_USER: ${{ secrets.DROPLET_USER }}
         run: |
           ssh-keyscan -H $DROPLET_IP >> ~/.ssh/known_hosts
-          ssh -i ~/.ssh/id_rsa $DROPLET_USER@$DROPLET_IP "cd /var/www/bartu-ninja/ && git pull && npm install && npm run build"
+          ssh -v -i ~/.ssh/id_rsa $DROPLET_USER@$DROPLET_IP "cd /var/www/bartu-ninja/ && git pull && npm install && npm run build"
