@@ -32,6 +32,7 @@ jobs:
         run: |
           ssh-keyscan -H $DROPLET_IP >> ~/.ssh/known_hosts
           ssh -v -i ~/.ssh/id_rsa $DROPLET_USER@$DROPLET_IP << 'EOF' 
+          rm -rf /var/www/bartu-ninja
           if [ ! -d "/var/www/bartu-ninja" ]; then
               echo "Cloning repository from GitHub..."
               echo "CD to /var/www"
