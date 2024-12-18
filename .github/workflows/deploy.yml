@@ -38,7 +38,7 @@ jobs:
               echo "CD to /var/www"
               cd /var/www
               echo "Running clone command: ${PWD}"
-              git clone $REPO_URL 
+              git clone -v $REPO_URL bartu-ninja
             fi
 
             echo "Pulling latest changes from GitHub..."
