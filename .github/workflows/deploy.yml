@@ -33,10 +33,10 @@ jobs:
           ssh-keyscan -H $DROPLET_IP >> ~/.ssh/known_hosts
           ssh -v -i ~/.ssh/id_rsa $DROPLET_USER@$DROPLET_IP << 'EOF' 
           if [ ! -d "/var/www/bartu-ninja" ]; then
-              mkdir -p /var/www/bartu-ninja
               echo "Cloning repository from GitHub..."
               echo "CD to /var/www"
               cd /var/www
+              mkdir bartu-ninja
               echo "Running clone command: ${PWD}"
               git clone -v $REPO_URL bartu-ninja
             fi
