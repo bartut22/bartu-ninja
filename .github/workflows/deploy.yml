@@ -35,7 +35,9 @@ jobs:
           if [ ! -d "/var/www/bartu-ninja" ]; then
               mkdir -p /var/www/bartu-ninja
               echo "Cloning repository from GitHub..."
+              echo "CD to /var/www"
               cd /var/www
+              echo "Running clone command: ${PWD}"
               git clone $REPO_URL 
             fi
 
