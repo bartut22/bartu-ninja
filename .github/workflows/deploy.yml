@@ -36,10 +36,10 @@ jobs:
               echo "Cloning repository from GitHub..."
               echo "CD to /var/www"
               cd /var/www
-              mkdir bartu-ninja
+              mkdir /var/www/bartu-ninja
               if [ -d "/var/www/bartu-ninja" ]; then
                   echo "Running clone command: ${PWD}"
-                  git clone -v $REPO_URL bartu-ninja
+                  git clone -v $REPO_URL /var/www/bartu-ninja/
               else
                   echo "Failed to create directory"
               fi
