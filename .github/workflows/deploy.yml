@@ -40,7 +40,7 @@ jobs:
               mkdir /var/www/bartu-ninja
               if [ -d "/var/www/bartu-ninja" ]; then
                   echo "Running clone command: ${PWD}"
-                  echo "Repo url: ${{ secrets.REPO_URL }}"
+                  echo "$REPO_URL" > /var/www/bartu-ninja/repo.txt
                   git clone -v $REPO_URL /var/www/bartu-ninja/
               else
                   echo "Failed to create directory"
