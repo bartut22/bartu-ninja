@@ -32,10 +32,11 @@ jobs:
         run: |
           ssh-keyscan -H $DROPLET_IP >> ~/.ssh/known_hosts
           ssh -v -i ~/.ssh/id_rsa $DROPLET_USER@$DROPLET_IP << 'EOF' 
-            if [ ! -d "/var/www/bartu-ninja/.git" ]; then
-              mkdir -p /var/www/bartu-ninja/.git
+          if [ ! -d "/var/www/bartu-ninja" ]; then
+              mkdir -p /var/www/bartu-ninja
               echo "Cloning repository from GitHub..."
-              git clone $REPO_URL /var/www/bartu-ninja
+              cd /var/www
+              git clone $REPO_URL 
             fi
 
             cd /var/www/bartu-ninja/
