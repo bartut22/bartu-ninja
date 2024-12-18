@@ -42,7 +42,7 @@ jobs:
 
           if [ -d "/var/www/bartu-ninja" ]; then
               echo "Running clone command: ${PWD}"
-              git clone -v $REPO_URL ~/../var/www/bartu-ninja/
+              git clone -v https://github.com/avocado5182/bartu-ninja.git bartu-ninja
           else
               echo "Failed to create directory"
           fi
