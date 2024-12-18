@@ -41,6 +41,7 @@ jobs:
               git clone $REPO_URL 
             fi
 
+            echo "Pulling latest changes from GitHub..."
             cd /var/www/bartu-ninja/
             git pull 
             npm install
