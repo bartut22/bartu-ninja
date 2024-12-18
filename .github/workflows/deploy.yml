@@ -34,22 +34,23 @@ jobs:
           ssh -v -i ~/.ssh/id_rsa $DROPLET_USER@$DROPLET_IP << 'EOF' 
           rm -rf /var/www/bartu-ninja
           if [ ! -d "/var/www/bartu-ninja" ]; then
-              echo "Cloning repository from GitHub..."
-              echo "CD to /var/www"
-              cd /var/www
-              mkdir /var/www/bartu-ninja
-              if [ -d "/var/www/bartu-ninja" ]; then
-                  echo "Running clone command: ${PWD}"
-                  echo "$REPO_URL" > "/var/www/bartu-ninja/repo.txt"
-                  git clone -v $REPO_URL /var/www/bartu-ninja/
-              else
-                  echo "Failed to create directory"
-              fi
-            fi
+            echo "Cloning repository from GitHub..."
+            echo "CD to /var/www"
+            cd /var/www
+            mkdir /var/www/bartu-ninja
+          fi
 
-            echo "Pulling latest changes from GitHub..."
-            cd /var/www/bartu-ninja/
-            git pull 
-            npm install
-            npm run build
+          if [ -d "/var/www/bartu-ninja" ]; then
+              echo "Running clone command: ${PWD}"
+              echo "$REPO_URL" > "/var/www/bartu-ninja/repo.txt"
+              git clone -v $REPO_URL /var/www/bartu-ninja/
+          else
+              echo "Failed to create directory"
+          fi
+
+          echo "Pulling latest changes from GitHub..."
+          cd /var/www/bartu-ninja/
+          git pull 
+          npm install
+          npm run build
           EOF
