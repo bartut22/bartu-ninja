@@ -37,8 +37,12 @@ jobs:
               echo "CD to /var/www"
               cd /var/www
               mkdir bartu-ninja
-              echo "Running clone command: ${PWD}"
-              git clone -v $REPO_URL bartu-ninja
+              if [ -d "/var/www/bartu-ninja" ]; then
+                  echo "Running clone command: ${PWD}"
+                  git clone -v $REPO_URL bartu-ninja
+              else
+                  echo "Failed to create directory"
+              fi
             fi
 
             echo "Pulling latest changes from GitHub..."
