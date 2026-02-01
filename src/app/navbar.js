@@ -17,7 +17,7 @@ let links = [
     { href: '/#projects', label: 'Projects', newTab: false, icon: null },
     { href: '/#about', label: 'About me', newTab: false, icon: null },
     { href: '/notes', label: 'Notes', newTab: false, icon: null },
-    { href: 'https://github.com/avocado5182', label: 'My GitHub', newTab: true, icon: faUpRightFromSquare },
+    { href: 'https://github.com/bartut22', label: 'My GitHub', newTab: true, icon: faUpRightFromSquare },
 ];
 
 export default function Navbar() {
