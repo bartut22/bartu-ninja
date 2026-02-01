@@ -9,7 +9,7 @@
 .heroFg {
     position: absolute;
     top: 0;
-    width: 100%;
+    width: 100vw;
     height: 100vh;
 
     display: flex;
@@ -21,8 +21,8 @@
 .heroFg > .heroTitle {
     font-family: "Josefin Sans", sans-serif;
     /* top: calc(50vh - 4.5rem - 2em); */
-    left: auto;
-    right: auto;
+    left: 0;
+    right: 0;
 
     font-size: 4.5rem;
     font-weight: 700;
