@@ -34,7 +34,7 @@ export default function HomeHeroWrapper() {
             <Navbar onLinkClick={handleLoadSketch} />
 
             <div className={styles.heroFg}>
-                <h1 className={`${styles.heroTitle} ${josefin_sans.className}`}>Bartu</h1>
+                <h1 className={`${styles.heroTitle} ${josefin_sans.className}`}>Bartu Tunctan</h1>
                 <Link href="#projects" tabIndex={0} className={styles.heroBtn} onClick={handleLoadSketch}>Go to my projects</Link>
                 <Link href="/notes" tabIndex={1} className={styles.heroBtn}>See my class notes</Link>
             </div>
