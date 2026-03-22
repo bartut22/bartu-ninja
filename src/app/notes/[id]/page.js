@@ -2,13 +2,13 @@ import styles from '@/app/page.module.css';
 import noteStyles from '../note.module.css';
 import Navbar from '@/app/navbar';
 import Footer from '@/app/footer';
-import { getAllNoteIds, getNote } from '@/app/../../lib/notes';
+import { getAllNoteIds, getNote, setFileNames } from '@/app/../../lib/notes';
 import Date from '@/app/date';
 import NoteTags from '@/app/noteTags';
 
 export async function generateMetadata({ params }, parent) {
     // read route params
-    const id = params.id
+    const { id } = await params;
 
     // fetch data
     const note = await getNote(id);
@@ -21,11 +21,13 @@ export async function generateMetadata({ params }, parent) {
 
 
 export async function generateStaticParams() {
+    await setFileNames();
     return getAllNoteIds();
 }
 
 export default async function Note({ params }) {
-    const note = await getNote(params.id);
+    const { id } = await params;
+    const note = await getNote(id);
 
     return (
         <main className={styles.main}>
