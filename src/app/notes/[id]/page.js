@@ -2,7 +2,7 @@ import styles from '@/app/page.module.css';
 import noteStyles from '../note.module.css';
 import Navbar from '@/app/navbar';
 import Footer from '@/app/footer';
-import { getAllNoteIds, getNote, setFileNames } from '@/app/../../lib/notes';
+import { getAllNoteIds, getNote } from '@/app/../../lib/notes';
 import Date from '@/app/date';
 import NoteTags from '@/app/noteTags';
 
@@ -21,7 +21,6 @@ export async function generateMetadata({ params }, parent) {
 
 
 export async function generateStaticParams() {
-    await setFileNames();
     return getAllNoteIds();
 }
 

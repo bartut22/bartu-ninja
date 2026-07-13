@@ -10,7 +10,7 @@ import NoteTags from '../noteTags'
 
 export default async function Notes() {
     await setFileNames();
-    const allNotes = getSortedNotesData();
+    const allNotes = await getSortedNotesData();
     await generateAllYamls();
     console.log("hi2");
 
