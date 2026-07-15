@@ -50,8 +50,8 @@ export default async function Note({ params }) {
 
             </div>
 
-            <Footer>
-            </Footer>
+            {/* <Footer>
+            </Footer> */}
         </main>
     );
 }

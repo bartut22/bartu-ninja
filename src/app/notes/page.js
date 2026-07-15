@@ -36,8 +36,8 @@ export default async function Notes() {
                 </ul>
             </div>
 
-            <Footer>
-            </Footer>
+            {/* <Footer>
+            </Footer> */}
         </main>
     )
 }

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import styles from './navbar.module.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 
 {/* <ul class="navul">
 <li class="navli"><a href="#top">Home</a></li>
@@ -17,7 +17,7 @@ let links = [
     { href: '/#projects', label: 'Projects', newTab: false, icon: null },
     { href: '/#about', label: 'About me', newTab: false, icon: null },
     { href: '/notes', label: 'Notes', newTab: false, icon: null },
-    { href: 'https://github.com/bartut22', label: 'My GitHub', newTab: true, icon: faUpRightFromSquare },
+    { href: 'https://github.com/bartut22', label: 'My GitHub', newTab: true, icon: null },
 ];
 
 export default function Navbar() {
@@ -28,10 +28,12 @@ export default function Navbar() {
                     <li className={styles.navli} key={label}>
                         {newTab
                             ? <a href={href} target="_blank">
-                                {icon ? <p>{label}  <FontAwesomeIcon icon={icon}></FontAwesomeIcon></p> : <p>{label}</p>}
+                                <p>{label}</p>
+                                {/* {icon ? <p>{label}  <FontAwesomeIcon icon={icon}></FontAwesomeIcon></p> : <p>{label}</p>} */}
                             </a>
                             : <Link href={href}>
-                                {icon ? <p>{label}  <FontAwesomeIcon icon={icon}></FontAwesomeIcon></p> : <p>{label}</p>}
+                                <p>{label}</p>
+                                {/* {icon ? <p>{label}  <FontAwesomeIcon icon={icon}></FontAwesomeIcon></p> : <p>{label}</p>} */}
                             </Link>}
                     </li>
                 ))}
