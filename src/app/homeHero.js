@@ -31,7 +31,7 @@ export default function HomeHeroWrapper() {
 
             {HeroSketchWrapper && <HeroSketchWrapper />}
 
-            <Navbar onLinkClick={handleLoadSketch} />
+            {/* <Navbar onLinkClick={handleLoadSketch} /> */}
 
             <div className={styles.heroFg}>
                 <h1 className={`${styles.heroTitle} ${josefin_sans.className}`}>Bartu Tunctan</h1>

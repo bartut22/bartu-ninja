@@ -16,8 +16,8 @@
     background-color: rgba(16, 16, 16, 0.5);
     display: inline-flex;
     list-style-type: none;
-    --webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
+    /* --webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px); */
 }
 
 .navli {
