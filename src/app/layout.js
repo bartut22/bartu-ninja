@@ -2,6 +2,7 @@ import './globals.css'
 import { Rubik } from 'next/font/google'
 import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
+import { Analytics } from "@vercel/analytics/next"
 config.autoAddCss = false
 
 const rubik = Rubik({ subsets: ['latin'] })
@@ -14,7 +15,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>{children} <Analytics /></body>
     </html>
   )
 }
