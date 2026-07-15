@@ -15,6 +15,7 @@
     "@p5-wrapper/next": "^1.0.3",
     "@p5-wrapper/react": "^4.4.2",
     "@vercel/analytics": "^2.0.1",
+    "@vercel/speed-insights": "^2.0.0",
     "date-fns": "^2.30.0",
     "eslint": "8.43.0",
     "eslint-config-next": "13.4.7",
