@@ -11,6 +11,7 @@ export async function generateMetadata({ params }, parent) {
     const { id } = await params;
 
     // fetch data
+    await setFileNames();
     const note = await getNote(id);
 
     return {
