@@ -58,7 +58,7 @@ export default async function Home() {
         </div>
 
         <div className={styles.about} id="about">
-          <Image className={styles.aboutImg} width={0} height={0} sizes="100vh" alt="A photo of me" src={"https://camo.githubusercontent.com/d0e27f505fef14198d5b4c6075b15d6aa9c0fe8b0083e933a710c53288138e8d/68747470733a2f2f63646e2e646973636f72646170702e636f6d2f656d6f6a69732f3737393832383439353933323938313237392e6769663f763d31"}></Image>
+          <Image className={styles.aboutImg} width={0} height={0} sizes="100vh" alt="A photo of me" src={""}></Image>
           <h1 tabIndex={4}>About me</h1>
 
           <p>
