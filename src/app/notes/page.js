@@ -10,7 +10,7 @@ import NoteTags from '../noteTags'
 
 export default async function Notes() {
     await setFileNames();
-    const allNotes = getSortedNotesData();
+    const allNotes = await getSortedNotesData();
     await generateAllYamls();
     console.log("hi2");
 
@@ -22,7 +22,7 @@ export default async function Notes() {
             <div className={styles.content}>
                 <h2>My Notes (:</h2>
                 <ul>
-                    {allNotes.map((note={ id, date, title, author, unit, course }) => (
+                    {allNotes.map((note) => (
                         <li className={notesStyles.li} key={`${note.id}${note.course != null ? "_" + note.course : null}`}>
                             <h3><Link href={`/notes/${note.id}`}>{note.title}</Link></h3>
                             <p>Author: {note.author}</p>

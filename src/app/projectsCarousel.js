@@ -18,27 +18,37 @@ const flickityOptions = {
 import CarouselCell from './carouselCell'
 
 export default function ProjectsCarousel(props) {
-    return (
-        <Flickity
-            className={styles.mainCarousel} // default ''
-            elementType={'div'} // default 'div'
-            options={flickityOptions} // takes flickity options {}
-            disableImagesLoaded={true} // default false
-            reloadOnUpdate={false} // default false
-            static={true} // default false
-        >
-            {/* {projects.items.map(item => <div className={styles.carouselCell} key={item.id}>{item.title}: {item.description}</div>)} */}
+  if (!props?.projects) return null;
+  if (!Array.isArray(props.projects))
+    throw new Error("projects is not an array");
 
-            {props.projects.map(item =>
-                <CarouselCell
-                    key={item.id}
-                    title={item.title}
-                    link={item.link}
-                    description={item.description}
-                    image={props.images[item.image]}
-                >
-                </CarouselCell>
-          )}
-        </Flickity>
-    )
+  return (
+    <Flickity
+      className={styles.mainCarousel} // default ''
+      elementType={"div"} // default 'div'
+      options={flickityOptions} // takes flickity options {}
+      disableImagesLoaded={true} // default false
+      reloadOnUpdate={false} // default false
+      static={true} // default false
+    >
+      {/* {projects.items.map(item => <div className={styles.carouselCell} key={item.id}>{item.title}: {item.description}</div>)} */}
+
+      {props.projects.map((item) => {
+        if (typeof item.description !== "string")
+          throw new Error(`description missing for item ${item.id}`);
+        if (item.image === undefined)
+          throw new Error(`image missing for item ${item.id}`);
+
+        return (
+          <CarouselCell
+            key={item.id}
+            title={item.title}
+            link={item.link}
+            description={item.description}
+            image={props.images[item.image]}
+          ></CarouselCell>
+        );
+      })}
+    </Flickity>
+  );
 }
