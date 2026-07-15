@@ -3,7 +3,7 @@ import Navbar from './navbar'
 import Footer from './footer'
 import styles from './page.module.css'
 import HomeHeroWrapper from './homeHero'
-import ProjectsCarousel from './projectsCarousel.js'
+import ProjectsCarousel from './projectsCarouselLoader'
 
 import complexius from '../../public/complexius.png'
 import gwarun from '../../public/gwarun-featuregraphic.png'
