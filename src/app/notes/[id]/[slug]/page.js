@@ -32,8 +32,8 @@ export default async function Note({ params }) {
 
     return (
         <main className={styles.main}>
-            <Navbar>
-            </Navbar>
+            {/* <Navbar>
+            </Navbar> */}
 
             <div className={noteStyles.note}>
                 <h1>{note.title}</h1>
@@ -49,9 +49,9 @@ export default async function Note({ params }) {
                 <div dangerouslySetInnerHTML={{ __html: note.contentHtml }} />
 
             </div>
-
+{/* 
             <Footer>
-            </Footer>
+            </Footer> */}
         </main>
     );
 }

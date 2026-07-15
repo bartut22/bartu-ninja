@@ -45,8 +45,8 @@ export default async function Home() {
 
   return (
     <main className={styles.main}>
-      <Navbar>
-      </Navbar>
+      {/* <Navbar>
+      </Navbar> */}
 
       <div className={styles.content}>
         <HomeHeroWrapper></HomeHeroWrapper>
@@ -58,7 +58,7 @@ export default async function Home() {
         </div>
 
         <div className={styles.about} id="about">
-          <Image className={styles.aboutImg} width={0} height={0} sizes="100vh" alt="A photo of me" src={""}></Image>
+          <Image className={styles.aboutImg} width={0} height={0} sizes="100vh" alt="A photo of me" src={"/icon-512x512.png"}></Image>
           <h1 tabIndex={4}>About me</h1>
 
           <p>
@@ -83,8 +83,8 @@ export default async function Home() {
         </div>
       </div>
 
-      <Footer>
-      </Footer>
+      {/* <Footer>
+      </Footer> */}
     </main>
   )
 }

@@ -16,8 +16,8 @@ export default async function Notes() {
 
     return (
         <main className={styles.main}>
-            <Navbar>
-            </Navbar>
+            {/* <Navbar>
+            </Navbar> */}
 
             <div className={styles.content}>
                 <h2>My Notes (:</h2>
@@ -36,8 +36,8 @@ export default async function Notes() {
                 </ul>
             </div>
 
-            <Footer>
-            </Footer>
+            {/* <Footer>
+            </Footer> */}
         </main>
     )
 }
