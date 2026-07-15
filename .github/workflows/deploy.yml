@@ -1,56 +1,56 @@
-name: Deploy to DigitalOcean
-# hi
-on:
-  push:
-    branches:
-      - new
+# name: Deploy to DigitalOcean
+# # hi
+# on:
+#   push:
+#     branches:
+#       - new
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@v4
 
-      - name: Set up SSH key
-        run: |
-          mkdir -p ~/.ssh
-          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-          sudo chmod 600 ~/.ssh/id_rsa
-          echo "ssh-rsa $SSH_PUBLIC_KEY" > ~/.ssh/authorized_keys
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          SSH_PUBLIC_KEY: ${{ secrets.SSH_PUBLIC_KEY }}
+#       - name: Set up SSH key
+#         run: |
+#           mkdir -p ~/.ssh
+#           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+#           sudo chmod 600 ~/.ssh/id_rsa
+#           echo "ssh-rsa $SSH_PUBLIC_KEY" > ~/.ssh/authorized_keys
+#         env:
+#           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+#           SSH_PUBLIC_KEY: ${{ secrets.SSH_PUBLIC_KEY }}
 
-      - name: SSH into Droplet and start build
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          DROPLET_IP: ${{ secrets.DROPLET_IP }}
-          DROPLET_USER: ${{ secrets.DROPLET_USER }}
-          REPO_URL: "https://github.com/bartut22/bartu-ninja.git"
-        run: |
-          ssh-keyscan -H $DROPLET_IP >> ~/.ssh/known_hosts
-          ssh -v -i ~/.ssh/id_rsa $DROPLET_USER@$DROPLET_IP << 'EOF' 
-          rm -rf /var/www/bartu-ninja
-          if [ ! -d "/var/www/bartu-ninja" ]; then
-            echo "Cloning repository from GitHub..."
-            echo "CD to /var/www"
-            cd /var/www
-            mkdir /var/www/bartu-ninja
-          fi
+#       - name: SSH into Droplet and start build
+#         env:
+#           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+#           DROPLET_IP: ${{ secrets.DROPLET_IP }}
+#           DROPLET_USER: ${{ secrets.DROPLET_USER }}
+#           REPO_URL: "https://github.com/bartut22/bartu-ninja.git"
+#         run: |
+#           ssh-keyscan -H $DROPLET_IP >> ~/.ssh/known_hosts
+#           ssh -v -i ~/.ssh/id_rsa $DROPLET_USER@$DROPLET_IP << 'EOF' 
+#           rm -rf /var/www/bartu-ninja
+#           if [ ! -d "/var/www/bartu-ninja" ]; then
+#             echo "Cloning repository from GitHub..."
+#             echo "CD to /var/www"
+#             cd /var/www
+#             mkdir /var/www/bartu-ninja
+#           fi
 
-          if [ -d "/var/www/bartu-ninja" ]; then
-              echo "Running clone command: ${PWD}"
-              git clone -v https://github.com/bartut22/bartu-ninja.git bartu-ninja
-          else
-              echo "Failed to create directory"
-          fi
+#           if [ -d "/var/www/bartu-ninja" ]; then
+#               echo "Running clone command: ${PWD}"
+#               git clone -v https://github.com/bartut22/bartu-ninja.git bartu-ninja
+#           else
+#               echo "Failed to create directory"
+#           fi
 
-          echo "Pulling latest changes from GitHub..."
-          cd /var/www/bartu-ninja/
-          git pull 
-          npm install
-          npm run build
-          echo "Build completed"
-          EOF
+#           echo "Pulling latest changes from GitHub..."
+#           cd /var/www/bartu-ninja/
+#           git pull 
+#           npm install
+#           npm run build
+#           echo "Build completed"
+#           EOF
