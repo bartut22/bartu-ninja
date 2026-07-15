@@ -1,11 +1,8 @@
 import Image from "next/image"
 import Link from "next/link"
 import styles from "./carouselCell.module.css"
-// markdown parser and parse description
-import { remark } from "remark"
-import html from "remark-html"
 
-export default async function CarouselCell(props) {
+export default function CarouselCell(props) {
     // if props is undefined, what do we do?
     // if props is undefined, we can't render the component
     // so we return null
