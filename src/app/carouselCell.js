@@ -12,10 +12,10 @@ export default async function CarouselCell(props) {
     if (!props) {
         return null;
     }
-    let description = await remark()
-        .use(html)
-        .process(props.description);
-    description = description.toString();
+    // let description = await remark()
+    //     .use(html)
+    //     .process(props.description);
+    // description = description.toString();
 
     return (
         <div className={styles.carouselCell}>
@@ -24,7 +24,7 @@ export default async function CarouselCell(props) {
                 <Link target="_blank" href={props.link}>
                     <h1>{props.title}</h1>
                 </Link>
-                <div dangerouslySetInnerHTML={{__html: description}}></div>
+                <div dangerouslySetInnerHTML={{__html: props.description}}></div>
             </div>
         </div>
     )

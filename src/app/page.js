@@ -9,13 +9,40 @@ import complexius from '../../public/complexius.png'
 import gwarun from '../../public/gwarun-featuregraphic.png'
 import manicIsland from '../../public/manic_island.gif'
 
+// markdown parser and parse description
+import { remark } from "remark"
+import html from "remark-html"
+
 const imgs = [
   complexius,
   gwarun,
   manicIsland,
 ]
 
-export default function Home() {
+async function processDescriptions(items) {
+  return Promise.all(items.map(async (item) => ({
+    ...item,
+    description: (await remark().use(html).process(item.description)).toString(),
+  })));
+}
+
+const projects = {
+    items: [
+        {
+            id: 0,
+            title: "gwa run",
+            link: "https://github.com/bartut22/gwarun",
+            description: "gwa run is a mobile endless runner game featuring a shop along with various skins! Using the in-game currency, users can buy skins for their character and use them to customize their experience. The game is built using the Unity Game Engine in C#. It released on May 31st, 2022 to [the Google Play Store](https://play.google.com/store/apps/details?id=com.PearStudios.gwarun). The game has a 5-star rating.",
+            image: 1 },
+        { id: 1, title: "Project 2", link: "https://youtube.com", description: "This is project 2", image: 2 },
+        { id: 2, title: "Project 3", link: "https://wikipedia.com", description: "This is project 3", image: 0 },
+
+    ]
+}
+
+export default async function Home() {
+    const processedProjects = await processDescriptions(projects.items);
+
   return (
     <main className={styles.main}>
       <Navbar>
@@ -27,7 +54,7 @@ export default function Home() {
         <div className={styles.projects} id="projects" tabIndex={2} >
           <h1 tabIndex={3}>Projects</h1>
 
-          <ProjectsCarousel images={imgs}></ProjectsCarousel>
+          <ProjectsCarousel images={imgs} projects={processedProjects}></ProjectsCarousel>
         </div>
 
         <div className={styles.about} id="about">
