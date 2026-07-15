@@ -45,8 +45,8 @@ export default async function Home() {
 
   return (
     <main className={styles.main}>
-      {/* <Navbar>
-      </Navbar> */}
+      <Navbar>
+      </Navbar>
 
       <div className={styles.content}>
         <HomeHeroWrapper></HomeHeroWrapper>
