@@ -1,90 +1,183 @@
-import Image from 'next/image'
-import Navbar from './navbar'
-import Footer from './footer'
-import styles from './page.module.css'
-import HomeHeroWrapper from './homeHero'
-import ProjectsCarousel from './projectsCarouselLoader'
+import { IBM_Plex_Mono, Mansalva } from "next/font/google";
+import styles from "./page.module.css";
 
-import complexius from '../../public/complexius.png'
-import gwarun from '../../public/gwarun-featuregraphic.png'
-import manicIsland from '../../public/manic_island.gif'
+const mono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+});
 
-// markdown parser and parse description
-import { remark } from "remark"
-import html from "remark-html"
+const handwriting = Mansalva({
+  subsets: ["latin"],
+  weight: "400",
+});
 
-const imgs = [
-  complexius,
-  gwarun,
-  manicIsland,
-]
+const links = [
+  {
+    label: "Email",
+    href: "mailto:bet3@rice.edu",
+    icon: (
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="3" y="5" width="18" height="14" rx="1.5" />
+        <path d="M3.5 6.5 12 13l8.5-6.5" />
+      </svg>
+    ),
+  },
+  {
+    label: "GitHub",
+    href: "https://github.com/bartut22",
+    icon: (
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+      </svg>
+    ),
+  },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/bartu-tunctan",
+    icon: (
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+        <rect x="2" y="9" width="4" height="12" />
+        <circle cx="4" cy="4" r="2" />
+      </svg>
+    ),
+  },
+    {
+    label: "Resume",
+    href: "/Bartu_Tunctan_Resume.pdf",
+    icon: (
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+        <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" />
+      </svg>
+    ),
+  },
+];
 
-async function processDescriptions(items) {
-  return Promise.all(items.map(async (item) => ({
-    ...item,
-    description: (await remark().use(html).process(item.description)).toString(),
-  })));
-}
+const projects = [
+  { title: "Sightreed", href: "https://github.com/bartut22/sightreed", image: "sightreed_logo.png", date: "spring '26" },
+  { title: "OwlQuest", href: "https://github.com/bartut22/owlquest", image: "owlquest.ico", date: "summer '26" },
+  { title: "QuickPlaces", href: "https://github.com/bartut22/QuickPlaces", image: "quickplaces.png", date: "fall '24" },
+  { title: "Battlecoin", href: "https://github.com/bartut22/battlecoin", image: "battlecoin.png", date: "sep. '26 | HackRice 16" },
+  { title: "DevKit Projects", href: "https://github.com/bartut22/devkit-projects", image: "devkit.jpeg", date: "aug. '26 - now" },
+];
 
-const projects = {
-    items: [
-        {
-            id: 0,
-            title: "gwa run",
-            link: "https://github.com/bartut22/gwarun",
-            description: "gwa run is a mobile endless runner game featuring a shop along with various skins! Using the in-game currency, users can buy skins for their character and use them to customize their experience. The game is built using the Unity Game Engine in C#. It released on May 31st, 2022 to [the Google Play Store](https://play.google.com/store/apps/details?id=com.PearStudios.gwarun). The game has a 5-star rating.",
-            image: 1 },
-        { id: 1, title: "Project 2", link: "https://youtube.com", description: "This is project 2", image: 2 },
-        { id: 2, title: "Project 3", link: "https://wikipedia.com", description: "This is project 3", image: 0 },
+const placeholderHues = [0, 60, 120, 180, 240, 300];
+const tilts = [-3, 2, -1.5, 2.5, -2, 1.5];
 
-    ]
-}
-
-export default async function Home() {
-    const processedProjects = await processDescriptions(projects.items);
-
+export default function Home() {
   return (
-    <main className={styles.main}>
-      <Navbar>
-      </Navbar>
+    <main className={`${styles.page} ${mono.className}`}>
+      <div className={styles.grain} aria-hidden="true" />
 
-      <div className={styles.content}>
-        <HomeHeroWrapper></HomeHeroWrapper>
+      <div className={styles.landing}>
+        <section className={styles.card}>
+          <div className={styles.photoWrap}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              className={styles.photo}
+              src="/headshot.jpg"
+              alt="Placeholder portrait of Bartu Tunctan"
+              width="400"
+              height="480"
+            />
+          </div>
 
-        <div className={styles.projects} id="projects" tabIndex={2} >
-          <h1 tabIndex={3}>Projects</h1>
+          <div className={styles.info}>
+            <h1 className={styles.name}>Bartu Tunctan</h1>
 
-          <ProjectsCarousel images={imgs} projects={processedProjects}></ProjectsCarousel>
-        </div>
+            <p className={styles.line}>📍 Houston, TX | Rice University</p>
+            <p className={styles.line}>Computer Science, Undergraduate</p>
 
-        <div className={styles.about} id="about">
-          <Image className={styles.aboutImg} width={0} height={0} sizes="100vh" alt="A photo of me" src={"/icon-512x512.png"}></Image>
-          <h1 tabIndex={4}>About me</h1>
+            <hr className={styles.rule} />
 
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nullam eget felis eget nunc lobortis mattis
-            aliquam faucibus purus. Mollis aliquam ut porttitor leo a diam. At erat pellentesque adipiscing commodo elit at. Est ante in nibh mauris cursus mattis. Elementum pulvinar
-            etiam non quam lacus suspendisse faucibus interdum posuere. Arcu ac tortor dignissim convallis. Semper auctor neque vitae tempus quam pellentesque. Ipsum faucibus vitae
-            aliquet nec ullamcorper sit. Id eu nisl nunc mi ipsum faucibus vitae. At tellus at urna condimentum mattis pellentesque id nibh. Malesuada nunc vel risus commodo. Amet est
-            placerat in egestas erat.
-            <br></br><br></br>
-            Vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae elementum. Consectetur adipiscing elit duis tristique. Aliquet risus feugiat
-            in ante metus dictum at tempor. Arcu felis bibendum ut tristique et egestas quis. At consectetur lorem donec massa sapien faucibus et molestie. Hac habitasse platea
-            dictumst vestibulum rhoncus est pellentesque. Aliquam sem fringilla ut morbi tincidunt augue interdum velit. Netus et malesuada fames ac turpis. Ac turpis egestas maecenas pharetra convallis posuere morbi. Nunc sed
-            blandit libero volutpat sed cras ornare arcu dui. Mi sit amet mauris commodo quis imperdiet. Aliquet eget sit amet tellus cras adipiscing enim eu. Euismod elementum nisi
-            quis eleifend quam adipiscing. Tellus rutrum tellus pellentesque eu tincidunt tortor aliquam nulla facilisi. Condimentum vitae sapien pellentesque habitant morbi. Aliquet
-            bibendum enim facilisis gravida neque convallis a cras. Fermentum dui faucibus in ornare quam.
-            <br></br><br></br>
-            Id aliquet lectus proin nibh nisl condimentum id. Neque vitae tempus quam pellentesque. Tristique sollicitudin nibh sit amet commodo nulla. Porttitor leo a diam
-            sollicitudin tempor id eu. Sed viverra ipsum nunc aliquet bibendum enim facilisis gravida neque. Massa sed elementum tempus egestas. Pharetra magna ac placerat vestibulum
-            lectus. Commodo nulla facilisi nullam vehicula ipsum a arcu cursus. Nec feugiat in fermentum posuere urna nec tincidunt praesent. Ac tincidunt vitae semper quis lectus
-            nulla at volutpat diam. Egestas purus viverra accumsan in nisl nisi scelerisque.
-          </p>
-        </div>
+            <p className={styles.line}>
+              <span className={styles.label}>Languages</span>
+              English, Turkish
+            </p>
+            <p className={styles.line}>
+              <span className={styles.label}>Hobbies</span>
+              Saxophone, lifting, cooking, traveling
+            </p>
+
+            <ul className={styles.links}>
+              {links.map((l) => (
+                <li key={l.label}>
+                  <a
+                    href={l.href}
+                    aria-label={l.label}
+                    title={l.label}
+                    // target={l.href.startsWith("http") ? "_blank" : undefined}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {l.icon}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
       </div>
 
-      {/* <Footer>
-      </Footer> */}
+      <section className={styles.projects} aria-label="Projects">
+        <header className={styles.projectsHead}>
+          <h2 className={styles.projectsTitle}>Projects</h2>
+        </header>
+
+        <ul className={styles.prints}>
+          {projects.map((p, i) => {
+            const print = (
+              <figure className={styles.print}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img className={styles.clip} src="/clothespin.png" alt="" />
+                <div className={styles.frame}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    className={styles.shot}
+                    src={p.image || "/project-placeholder.svg"}
+                    alt={p.image ? p.title : `${p.title} placeholder`}
+                    style={
+                      p.image ? undefined : { "--hue": `${placeholderHues[i]}deg` }
+                    }
+                    loading="lazy"
+                  />
+                </div>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img className={styles.polaroid} src="/polaroid.png" alt="" />
+                <figcaption className={`${styles.caption} ${handwriting.className}`}>
+                  {p.date && <span className={styles.projectDate}>{p.date}</span>}
+                  <span className={styles.projectTitle}>{p.title}</span>
+                </figcaption>
+              </figure>
+            );
+
+            const external = p.href && /^https?:\/\//.test(p.href);
+
+            return (
+              <li
+                key={p.title}
+                className={styles.slot}
+                style={{ "--i": i, "--tilt": `${tilts[i]}deg` }}
+              >
+                {p.href ? (
+                  <a
+                    className={styles.link}
+                    href={p.href}
+                    aria-label={p.title}
+                    target={external ? "_blank" : undefined}
+                    rel={external ? "noopener noreferrer" : undefined}
+                  >
+                    {print}
+                  </a>
+                ) : (
+                  print
+                )}
+              </li>
+            );
+          })}
+        </ul>
+      </section>
     </main>
-  )
+  );
 }
