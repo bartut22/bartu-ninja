@@ -9,8 +9,8 @@ config.autoAddCss = false
 const rubik = Rubik({ subsets: ['latin'] })
 
 export const metadata = {
-  title: 'Bartu.ninja',
-  description: 'My portfolio and class notes (:',
+  title: 'Bartu Tunctan',
+  description: 'My developer portfolio',
 }
 
 export default function RootLayout({ children }) {
