@@ -11,6 +11,10 @@ const rubik = Rubik({ subsets: ['latin'] })
 export const metadata = {
   title: 'Bartu Tunctan',
   description: 'My developer portfolio',
+  metadataBase: new URL('https://www.bartutunctan.com'),
+  alternates: {
+    canonical: '/',
+  },
 }
 
 export default function RootLayout({ children }) {
