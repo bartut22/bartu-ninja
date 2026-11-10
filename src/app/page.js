@@ -178,6 +178,36 @@ export default function Home() {
           })}
         </ul>
       </section>
+
+      <nav className={styles.webring} aria-label="The Rice Atlas">
+        <a
+          className={styles.webringArrow}
+          href="https://thericeatlas.com/nav.html?netid=bet3&dir=prev"
+          aria-label="Previous website"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M19 12H5M11 6l-6 6 6 6" />
+          </svg>
+        </a>
+        <a className={styles.webringOwl} href="https://thericeatlas.com/">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/owl-blue.svg"
+            alt="The Rice Atlas"
+            width="30"
+            height="36"
+          />
+        </a>
+        <a
+          className={styles.webringArrow}
+          href="https://thericeatlas.com/nav.html?netid=bet3&dir=next"
+          aria-label="Next website"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg>
+        </a>
+      </nav>
     </main>
   );
 }

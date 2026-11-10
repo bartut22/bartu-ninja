@@ -170,6 +170,58 @@
   padding: 2rem 0 4rem;
 }
 
+.webring {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0 1.25rem 2rem;
+  padding: 0.45rem 0.7rem;
+  color: var(--blue);
+  border: 2px dotted var(--blue);
+}
+
+.webringArrow,
+.webringOwl {
+  display: grid;
+  place-items: center;
+  color: inherit;
+}
+
+.webringArrow {
+  width: 1.75rem;
+  height: 1.75rem;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.webringArrow:hover,
+.webringArrow:focus-visible {
+  background: var(--blue);
+  color: var(--cream);
+  outline: none;
+}
+
+.webringArrow svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+
+.webringOwl {
+  transition: transform 0.15s;
+}
+
+.webringOwl:hover,
+.webringOwl:focus-visible {
+  transform: translateY(-2px);
+  outline: none;
+}
+
 .projectsHead {
   max-width: 62rem;
   margin: 0 auto 2.5rem;
